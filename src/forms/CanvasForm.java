@@ -8,6 +8,8 @@ import java.awt.image.BufferedImage;
 import javax.swing.JComponent;
 
 import utils.Constants;
+import utils.ImageManager;
+
 /**
  * This file contains the canvas, and the main function is to propagate the clicks, events, delta time,
  * to the main menu and consequently to the classes inside the menu.
@@ -21,7 +23,7 @@ public class CanvasForm extends JComponent {
 	private final BufferedImage testImage;
 
 	public CanvasForm() {
-		testImage =  Constants.readImage("Basic Charakter Spritesheet.png");
+		testImage =  ImageManager.readImage("1-1.png");
 
 		// start the thread
 		//new Thread(this).start();
@@ -37,9 +39,9 @@ public class CanvasForm extends JComponent {
 		g.fillRect(0, 0, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
 
 
-		g.drawImage(grabImage(testImage, 0, 0, 192, 192), 0, 0, 200, 200, this);
+		//g.drawImage(grabImage(testImage, 0, 0, 192, 192), 200, 0, 200, 200, this);
+		g.drawImage(testImage, 200, 0, 145, 200, this);
 		g.setColor(Color.BLACK);
-		g.drawRect( 0, 0, 300, 300);
 	}
 
 	public BufferedImage grabImage(BufferedImage image, int col, int row, int width, int height) {
