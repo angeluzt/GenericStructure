@@ -74,7 +74,7 @@ public class DeltaForm extends JFrame implements Runnable, MouseListener, MouseM
 	
 	        this.initialTime = currentTime;
 	
-	        // UPS - Update Per Second
+	        // UPS - Update Per Second - how many times we want to update game logic per second
 		    if(this.deltaUps >= 1){
 		    	if(enableTimeCount) {
 		    		startTime = System.nanoTime();
@@ -86,14 +86,14 @@ public class DeltaForm extends JFrame implements Runnable, MouseListener, MouseM
 		    	 */
 		    	this.gameManager.tick(UPS);
 		    	this.deltaUps = 0;
-		    	
-		    	if(enableTimeCount) {
+
+				if(enableTimeCount) {
 			        elapsedTime = System.nanoTime() - startTime;
 			        System.out.println("Total execution time to create 1000K objects in Java in millis: " + elapsedTime/1000000);
 		    	}
 		    }
 
-	        // FPS - Frames Per Second
+	        // FPS - Frames Per Second - how many times we want to repaint the game per second
 		    if(this.deltaFps >= 1) {
 		    	this.gameManager.repaintGame();
 		    	this.deltaFps = 0;
@@ -111,6 +111,7 @@ public class DeltaForm extends JFrame implements Runnable, MouseListener, MouseM
 	}
 	@Override
 	public void mouseReleased(MouseEvent e) {
+		this.gameManager.propagateRelease(e.getPoint());
 	}
 
 	@Override

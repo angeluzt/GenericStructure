@@ -7,6 +7,10 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JComponent;
 
+import component.Card;
+import component.CardGroup;
+import component.Deck;
+import component.GameBoard;
 import utils.Constants;
 import utils.ImageManager;
 
@@ -20,10 +24,17 @@ import utils.ImageManager;
 public class CanvasForm extends JComponent {
 
 	private static final long serialVersionUID = 1L;
-	private final BufferedImage testImage;
+	//private final BufferedImage testImage;
+	//Card testImage;
+	//Deck deck;
+	//CardGroup cardGroup;
+	GameBoard gameBoard;
 
 	public CanvasForm() {
-		testImage =  ImageManager.readImage("1-1.png");
+		gameBoard = new GameBoard();
+		//deck = new Deck();
+		//cardGroup = new CardGroup(0, 0, deck.removeXCards(13), false);
+		//testImage = new Card(0,0, "1-1.png");
 
 		// start the thread
 		//new Thread(this).start();
@@ -38,10 +49,9 @@ public class CanvasForm extends JComponent {
 		g.setColor(Constants.BACKGROUND_COLOR);
 		g.fillRect(0, 0, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
 
-
-		//g.drawImage(grabImage(testImage, 0, 0, 192, 192), 200, 0, 200, 200, this);
-		g.drawImage(testImage, 200, 0, 145, 200, this);
-		g.setColor(Color.BLACK);
+		//deck.drawGraphics(g);
+		gameBoard.drawGraphics(g);
+		//testImage.drawGraphics(g);
 	}
 
 	public BufferedImage grabImage(BufferedImage image, int col, int row, int width, int height) {
@@ -99,10 +109,17 @@ public class CanvasForm extends JComponent {
 	}
 
 	public void propagateClick(Point point) {
-		System.out.println("Click: X = " + point.getX() + ", Y = " + point.getY());
+		gameBoard.clickEvent(point);
+		//System.out.println("Click: X = " + point.getX() + ", Y = " + point.getY());
 	}
 
 	public void propagateDrag(Point point) {
-		System.out.println("Drag: X = " + point.getX() + ", Y = " + point.getY());
+		gameBoard.dragEvent(point);
+		//System.out.println("Drag: X = " + point.getX() + ", Y = " + point.getY());
+	}
+
+	public void propagateRelease(Point point) {
+		gameBoard.releaseEvent();
+		//System.out.println("Drag: X = " + point.getX() + ", Y = " + point.getY());
 	}
 }
